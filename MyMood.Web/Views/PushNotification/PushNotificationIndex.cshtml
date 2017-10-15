@@ -1,0 +1,108 @@
+﻿@model IEnumerable<MyMood.Web.Models.EditPushNotificationModel>
+
+<div class="widgetHeader">
+    <h3>Push Notification</h3>
+    <a href="@Url.RouteUrl("PushNotification-Add", new { eventId = ViewBag.EventId })" class="addPushNotification">Create New</a>
+</div>
+
+<div class="widgetContent widgetTable">
+    <table cellspacing="0" class="tableStriped" id="pushNotificationsTable">
+        <thead>
+            <tr>
+                <th class="singleIcon"></th>
+                <th>Notification Text</th>
+                <th class="dateTime">Send Date/Time (L)</th>
+                <th class="status">Status</th>
+                <th class="singleIcon"></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td class="singleIcon">@if (!item.Sent)
+                    {
+                        <a class="editPushNotification ui-icon ui-icon-disk" href="@Url.RouteUrl("PushNotification-Edit", new { id = item.Id })" title="Click to edit Push Notification"></a>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                <td title="@item.SendDateUTC">@item.SendDate.FullDate.ToWebDateTime()</td>
+                <td>@(item.Sent ? "Sent" : "Pending")</td>
+                <td class="singleIcon">@if (!item.Sent)
+                    {
+                        <a class="removePushNotification ui-icon ui-icon-circle-close" href="@Url.RouteUrl("PushNotification-Delete", new { id = item.Id, eventId = ViewBag.EventId })" title="Click to remove Push Notification"></a>
+                    }
+                </td>
+
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@Html.Partial(MVC.Event.Views.EventChildFooter)
+
+@section BodyScripts
+{
+    @if (false)
+    {
+        <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    }
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            // enhance "add user" functionality by enabling AJAX edit via dialog
+            $("a.addPushNotification").click(function (event) {
+                event.preventDefault();
+                showDialogForm({
+                    contentUrl: $(this).attr("href"),
+                    title: "Add Push Notification",
+                    buttons: [
+                    { text: "Create", click: function () { submitDialogForm(this, { onSuccess: function (data) { $(this).dialog("close"); refreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+                });
+            });
+
+            // enhance "edit mood prompt" functionality by enabling AJAX edit via dialog
+            $("a.editPushNotification").live("click", function (event) {
+                event.preventDefault();
+                showDialogForm({
+                    contentUrl: $(this).attr("href"),
+                    title: "Edit Push Notification",
+                    buttons: [
+                        { text: "Update", click: function () { submitDialogForm(this, { onSuccess: function () { $(this).dialog("close"); refreshPage(); } }); } }, 
+                        { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                    ]
+                });
+            });
+
+            $("a.viewPushNotification").live("click", function (event) {
+                event.preventDefault();
+                showErrorMessage({ title: "Hang on there boy !", text: "This function hasn't been implemented yet." });
+            });
+
+            $("a.removePushNotification").live("click", function (event) {
+                event.preventDefault();
+                var link = $(this);
+                confirmYesNo({
+                    text: "Are you sure wish to permanently delete this Push Notification ?",
+                    onYes: function () {
+                        $.ajax({
+                            url: link.attr("href"),
+                            success: function (data, status, xhr) {
+                                if (data.success) {
+                                    refreshPage();
+                                } else if (data.errorMessage) {
+                                    showErrorMessage({ title: "Could Not Remove Push Notificaiton", text: data.errorMessage });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿@model MyMood.Web.Models.EditPushNotificationModel
+
+@using (Html.BeginForm(MVC.PushNotification.ActionNames.Save, MVC.PushNotification.Name))
+{
+
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.EventId)
+
+    <div>
+        @Html.LabelFor(model => model.Message)
+        <table>
+            <tr><td>
+                @Html.TextAreaFor(model => model.Message, new { @class = "editPushNotificationText" })
+            </td></tr>
+        </table>
+        @Html.ValidationMessageFor(model => model.Message)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.PlaySound)
+        @Html.CheckBoxFor(model => model.PlaySound)
+    </div>
+    
+    <div>
+        @Html.LabelFor(m => m.SendImmediately)
+        @Html.CheckBoxFor(m => m.SendImmediately)
+    </div>      
+    
+    <div>
+        @Html.LabelFor(m => m.SendDate)
+        @Html.EditorFor(m => m.SendDate)
+        @Html.ValidationMessageFor(m => m.SendDate)
+    </div>  
+
+
+}
+
+@if (false)
+{
+    <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $checkbox = $('#SendImmediately');
+        $checkbox.change(function () { ToggleDateVisibility($checkbox); });
+        ToggleDateVisibility($checkbox);
+    });
+
+    function ToggleDateVisibility($cb) {
+        $cb.parent().next().toggleClass("hidden", $cb.is(":checked"));
+    }
+
+</script>
+

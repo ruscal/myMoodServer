@@ -1,0 +1,13 @@
+﻿
+body { background: #4f5761; color: #fff; font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+a { color: #fff; }
+a:hover { color: #9cf; }
+.container { display: block; width: 1000px; margin: 0px auto; position: relative;   }
+.content { margin-left: 200px; padding-top: 100px; width: 600px; position: relative; padding-bottom: 50px;  }
+h1 { position: absolute; top: 0px; width: 200px; display: block; height: 100%; background: url(/Content/images/Logo.png) no-repeat center top; text-indent: -99999px; }
+h2 { font-family: Helvetica, “Bitstream Vera Sans Bold”, “Arial Black”, sans serif; font-weight: bold;  }
+p { font-size: 14px; margin-bottom: 50px;  }
+p.created {}
+p.created span { display: block;  background: url(/Content/images/DiscoLogo.png) no-repeat left top;width: 130px; height: 17px; text-indent: -9999px; }
+p.install { background: url(/Content/images/InstallText.png) no-repeat center top; padding-left: 124px; display: block;  width: 300px; overflow: hidden; text-indent: -9999px; position: absolute; right: 0px; bottom: 0px; height: 150px;  margin: 0px;  }
+p.install a { background: url(/Content/images/Install.png) no-repeat left top; display: block; width: 150px; height: 150px; float: right;   }

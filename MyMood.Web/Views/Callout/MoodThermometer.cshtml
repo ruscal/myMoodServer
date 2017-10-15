@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Mood Meter";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+
+    Bundles.Reference("Scripts/callouts");
+}
+@section Styles
+{
+<style type="text/css">
+    @@font-face 
+    {
+        font-family: 'Impact';
+    }
+    #mood-meter
+    {
+        position:absolute;
+        left:0px;
+        top:0px;
+        bottom:0px;
+        width:170px;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+    canvas
+    {
+        position:relative;
+        display:block;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+</style>
+}
+
+<div id="mood-meter">
+</div>
+
+@section BodyScripts
+{
+@if (false)
+{
+    <script src="../../Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    <script src="../../Scripts/fabric.js" type="text/javascript"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#mood-meter").moodmeter({
+            dataUrl: '@Url.RouteUrl("Callout-MoodThermometer", new { EventName = ViewContext.RouteData.Values["EventName"] })',
+            updateInterval: 5000,
+            theme: {
+                logoImageUrl: '@Url.Content("~/Content/Images/Callout/logo.png")'
+            }
+        });
+    });
+</script>

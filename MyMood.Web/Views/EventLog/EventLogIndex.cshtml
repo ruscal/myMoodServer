@@ -1,0 +1,84 @@
+﻿@model MyMood.Web.Models.ViewEventLogModel
+@{
+    ViewBag.Title = "Event Log Reporter";
+}
+
+<div class="widget">
+    <div class="widgetHeader">
+        <h3>Log Entries</h3>
+    </div>
+    @using (Html.BeginForm ()) {
+    <div class="widgetTable widgetContent">
+        <table cellspacing="0" class="tableStriped" id="logSearchCriteria">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(x => x.SearchText)</th>
+                <th class="errorLevel">@Html.LabelFor(x => x.ErrorLevel)</th>
+                <th class="dateTimeEditor">@Html.LabelFor(x => x.EarliestDate)</th>
+                <th class="dateTimeEditor">@Html.LabelFor(x => x.LatestDate)</th>
+                <th class="submit">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="errorText">@Html.EditorFor(x => x.SearchText)</td>
+                <td>@Html.DropDownListFor(x => x.ErrorLevel, Model.ErrorLevels.Select(v => new SelectListItem() { Value = v, Text = v }).ToList())</td>
+                <td>@Html.EditorFor(x => x.EarliestDate, new { TimeZoneVar = "z" })</td>
+                <td>@Html.EditorFor(x => x.LatestDate, new { TimeZoneVar = "z" })</td>
+                <td><input type="submit" value="Refresh" /></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    }
+    <div class="widgetContent widgetTable">
+        <table cellspacing="0" class="tableStriped" id="logTable">
+            <thead>
+                <tr>
+                    <th class="singleIcon">&nbsp;</th>
+                    <th class="id">Id</th>
+                    <th>Message</th>
+                    <th class="dateTime">Time (z)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model.EventLogEntries)
+                {
+                <tr>
+                    <td><span class='level @log.Level.ToLower()' title='@log.Level'>@log.Level</span></td>
+                    <th title="@log.Source">@log.Id</th>
+                    <td>@log.Message</td>
+                    <td>@log.TimeStamp</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@if (false)
+{
+    <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        enhanceFormInputs($('form'));
+
+        $('#logTable').dataTable({
+            bPaginate: false,
+            sPaginationType: "full_numbers",
+            bLengthChange: false,
+            bFilter: false,
+            bAutoWidth: false,
+            bInfo: true,
+            fnInfoCallback: function (oSettings, iStart, iEnd, iMax, iTotal, sPre) {
+                return iTotal + " in total";
+            }
+        });
+
+    });
+    
+</script>

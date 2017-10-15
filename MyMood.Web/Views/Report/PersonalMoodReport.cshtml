@@ -1,0 +1,32 @@
+﻿@model MyMood.Web.Models.PersonalMoodReportViewModel
+@{
+    ViewBag.Title = "Personal Mood Report";
+}
+<div id="personalReport">
+    <div class="header">
+@*        <h2>
+            myMood Timeline Report</h2>*@
+
+    </div>
+    @{
+        var day = new DateTime();
+        
+        foreach(var response in Model.Responses){
+         
+            if(day != response.TimeStamp.Date){
+                day = response.TimeStamp.Date;
+                
+                <h3 class="day">@day.ToString("dd MMM yyyy")</h3>  
+            }
+             <div class="response @response.Mood.ToLower()" style="page-break-inside:avoid"><span class="time">@response.TimeStamp.ToString("H:mm")</span>
+             <span class="mood">@response.Mood</span>
+                <span class="title">@response.Title</span>
+             </div>  
+        }
+        
+    }
+
+    <div class="footer">
+    For further information please contact Martin de Planta (<a href="mailto:martin.de_planta@novartis.com">martin.de_planta@novartis.com</a>)   Report Ref:  <span style="font-weight:bold;color:Maroon;">@Model.ResponderId</span>.
+    </div>
+</div>

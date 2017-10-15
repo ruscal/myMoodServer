@@ -1,0 +1,116 @@
+﻿@model MyMood.Web.Models.ManageUsersViewModel
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<div class="widget">
+    <div class="widgetHeader">
+        <h3>All Users</h3>
+        <a href="@Url.RouteUrl("AddUser")" class="add-user">Add...</a>
+    </div>
+    <div class="widgetContent widgetTable">
+        <table cellspacing="0" class="tableStriped users">
+            <thead>
+                <tr>
+                    <th class="singleIcon">&nbsp;</th>
+                    <th class="username">UserName</th>
+                    <th class="displayname">Name</th>
+                    <th class="emailaddress">Email</th>
+                    <th class="singleIcon">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users.OrderBy(u => u.UserName))
+                {
+                <tr class="user @(!user.IsApproved ? "disabled" : string.Empty) @(user.IsLockedOut ? "locked" : string.Empty)">
+                    <td  class="singleIcon">@if (user.IsLockedOut){<a class="unlock-user" href="@Url.RouteUrl("UnlockUser", new { userId = user.Id })" title="Click to unlock this account"><span class="iconDark icon-lock"></span></a>}</td>
+                    <td class="username"><a class="edit-user" href="@Url.RouteUrl("EditUser", new { userId = user.Id })" title="Click to edit details">@user.UserName</a></td>
+                    <td class="displayname">@user.DisplayName</td>
+                    <td class="emailaddress">@user.EmailAddress</td>
+                    <td  class="singleIcon">@if(user.Id != User.Identity.UserInfo.Id){ <a class="remove-user" href="@Url.RouteUrl("RemoveUser", new { userId = user.Id })" title="Click to remove this account"><span class="iconDark icon-trash"></span>x</a>}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section BodyScripts
+{
+@if (false)
+{
+    <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // enhance "add user" functionality by enabling AJAX edit via dialog
+        $("a.add-user").click(function (event) {
+            event.preventDefault();
+            showDialogForm({
+                contentUrl: $(this).attr("href"),
+                title: "Add user",
+                buttons: [
+                    { text: "Create", click: function () { submitDialogForm(this, { onSuccess: function (data) { $(this).dialog("close"); refreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+            });
+        });
+
+        // enhance "edit user" functionality by enabling AJAX edit via dialog
+        $("a.edit-user").live("click", function (event) {
+            event.preventDefault();
+            showDialogForm({
+                contentUrl: $(this).attr("href"),
+                title: "Edit user",
+                buttons: [
+                    { text: "Update", click: function () { submitDialogForm(this, { onSuccess: function () { $(this).dialog("close"); refreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+            });
+        });
+
+        $("a.unlock-user").live("click", function (event) {
+            event.preventDefault();
+            var link = $(this);
+            var userName = link.closest("td").next("td.username").text();
+            $.ajax({
+                url: link.attr("href"),
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                success: function (data, status, xhr) {
+                    if (data.success) {
+                        link.closest("tr").removeClass("locked");
+                        link.remove();
+                        $("<div class='flash-message'></div>").css({ display: "none" }).appendTo("body").flashMessage({ message: "User account for " + userName + " has been unlocked", onHide: function () { $(this).remove(); } });
+                    }
+                }
+            });
+        });
+
+        $("a.remove-user").live("click", function (event) {
+            event.preventDefault();
+            var link = $(this);
+            var userName = link.closest("td").next("td.username").text();
+            confirmYesNo({
+                text: "Are you sure wish to permanently delete this user account?",
+                onYes: function () {
+                    $.ajax({
+                        url: link.attr("href"),
+                        success: function (data, status, xhr) {
+                            if (data.success) {
+                                refreshUserList();
+                            } else if (data.errorMessage) {
+                                showErrorMessage({ title: "Could Not Remove User", text: data.errorMessage });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+    });
+
+</script>
+}

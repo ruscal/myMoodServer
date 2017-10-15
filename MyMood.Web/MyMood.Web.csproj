@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{56EF985F-4379-4605-9FBD-9F81CCB13DAA}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyMood.Web</RootNamespace>
+    <AssemblyName>MyMood.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Local-Server|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\MyMood.Web.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Web-Server|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\MyMood.Web.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test-Server|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\MyMood.Web.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\packages\AjaxMin.4.60.4609.17023\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette">
+      <HintPath>..\packages\Cassette.2.0.0\lib\net40-client\Cassette.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Aspnet">
+      <HintPath>..\packages\Cassette.Aspnet.2.0.0\lib\net40\Cassette.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Views">
+      <HintPath>..\packages\Cassette.Views.2.0.0\lib\net40\Cassette.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="evohtmltopdf">
+      <HintPath>..\_dependencies\evohtmltopdf.dll</HintPath>
+    </Reference>
+    <Reference Include="MailBee.NET, Version=6.10.2.308, Culture=neutral, PublicKeyToken=cd85b70fb26f9fc1, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Extended, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.Extended.2.0.0.2000\lib\net40-full\NLog.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\packages\T4MVCExtensions.3.4.1\lib\net40\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppPassCodeOrAuthenticationRequired.cs" />
+    <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="CalloutController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\PushNotificationController.cs" />
+    <Compile Include="Controllers\DataSyncController.cs" />
+    <Compile Include="Controllers\EventControllerBase.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\EventLogController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataSyncAgent.cs" />
+    <Compile Include="DependencyResolution\SmControllerFactory.cs" />
+    <Compile Include="EventController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventLogController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataSync\DataSyncChangeSet.cs" />
+    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\EventsViewModel.cs" />
+    <Compile Include="Models\Event\EditEventModel.cs" />
+    <Compile Include="Models\GlobalMoodReportDataRequestModel.cs" />
+    <Compile Include="Models\GlobalMoodReportInfoModel.cs" />
+    <Compile Include="Models\EventLog\ViewEventLogModel.cs" />
+    <Compile Include="Models\MoodPrompt\EditActivityModel.cs" />
+    <Compile Include="Models\MoodPrompt\EditMoodPromptModel.cs" />
+    <Compile Include="Models\PushNotification\EditPushNotificationModel.cs" />
+    <Compile Include="Models\RequestGlobalReportInfoModel.cs" />
+    <Compile Include="Models\Shared\ModelTime.cs" />
+    <Compile Include="Models\Shared\TableModel.cs" />
+    <Compile Include="Models\User\AddUserFormModel.cs" />
+    <Compile Include="Models\User\ChangePasswordFormModel.cs" />
+    <Compile Include="Models\User\EditUserFormModel.cs" />
+    <Compile Include="Models\User\ForgottenPasswordFormModel.cs" />
+    <Compile Include="Models\User\ManageUsersViewModel.cs" />
+    <Compile Include="Models\User\ResetPasswordFormModel.cs" />
+    <Compile Include="Models\User\UserLogInFormModel.cs" />
+    <Compile Include="MoodController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MoodPromptController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PasscodeOrAuthenticationRequired.cs" />
+    <Compile Include="PushNotificationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PushNotificationManager.cs" />
+    <Compile Include="ReportController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPassCodeOrAuthenticationRequired.cs" />
+    <Compile Include="CassetteConfiguration.cs" />
+    <Compile Include="Configuration\WebConfiguration.cs" />
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\CalloutController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\MoodController.cs" />
+    <Compile Include="Controllers\MoodPromptController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ResponderController.cs" />
+    <Compile Include="DependencyResolution\IoC.cs" />
+    <Compile Include="DependencyResolution\SmDependencyResolver.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalMoodMapImage.cs" />
+    <Compile Include="Models\ApplicationStateModel.cs" />
+    <Compile Include="Models\AppRequestModelBase.cs" />
+    <Compile Include="Models\ActivityModel.cs" />
+    <Compile Include="Models\GlobalMoodReportModel.cs" />
+    <Compile Include="Models\GlobalMoodReportRequestModel.cs" />
+    <Compile Include="Models\MoodCategoryModel.cs" />
+    <Compile Include="Models\MoodModel.cs" />
+    <Compile Include="Models\MoodPromptModel.cs" />
+    <Compile Include="Models\MoodResponseUpdateModel.cs" />
+    <Compile Include="Models\MoodResponsesViewModel.cs" />
+    <Compile Include="Models\MoodSnaphotReportModel.cs" />
+    <Compile Include="Models\MoodSnapshotModel.cs" />
+    <Compile Include="Models\MoodSnapshotRequestModel.cs" />
+    <Compile Include="Models\PersonalMoodReportViewModel.cs" />
+    <Compile Include="Models\RegisterInterestInAppModel.cs" />
+    <Compile Include="Models\RequestPersonalMoodReportModel.cs" />
+    <Compile Include="Models\SubmitResponseModel.cs" />
+    <Compile Include="Models\UpdateAppFromServiceModel.cs" />
+    <Compile Include="Models\UpdateServiceFromAppModel.cs" />
+    <Compile Include="MyMoodWebService.asmx.cs">
+      <DependentUpon>MyMoodWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="JsonTokenAuthenticationRequired.cs" />
+    <Compile Include="ReportHelper.cs" />
+    <Compile Include="ResponderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduledWorkService.cs" />
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UrlToPdfHelper.cs" />
+    <Compile Include="UserController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\CSS\app.css" />
+    <Content Include="Content\CSS\install.css" />
+    <Content Include="Content\CSS\jquery-ui.css" />
+    <Content Include="Content\CSS\report.css" />
+    <Content Include="Content\HtmlTemplates\MailTemplates\InterestAcknowledgedMail.htm" />
+    <Content Include="Content\HtmlTemplates\MailTemplates\InterestRegisteredMail.htm" />
+    <Content Include="Content\HtmlTemplates\MailTemplates\MailTemplateMaster.htm" />
+    <Content Include="Content\HtmlTemplates\MailTemplates\PersonalMoodReportMail.htm" />
+    <Content Include="Content\HtmlTemplates\MailTemplates\SurveyEmailTemplate.htm" />
+    <Content Include="Content\HtmlTemplates\MailTemplates\SurveyReminderTemplate.htm" />
+    <Content Include="Content\Images\BG.png" />
+    <Content Include="Content\Images\bored.png" />
+    <Content Include="Content\Images\callout\All-Moods.svg" />
+    <Content Include="Content\Images\callout\Bored-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Bored-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Bored.svg" />
+    <Content Include="Content\Images\callout\Deflated-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Deflated-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Deflated.svg" />
+    <Content Include="Content\Images\callout\Disengaged-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Disengaged-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Disengaged.svg" />
+    <Content Include="Content\Images\callout\Engaged-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Engaged-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Engaged.svg" />
+    <Content Include="Content\Images\callout\Excited-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Excited-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Excited.svg" />
+    <Content Include="Content\Images\callout\Frustrated-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Frustrated-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Frustrated.svg" />
+    <Content Include="Content\Images\callout\Logo-with-text.svg" />
+    <Content Include="Content\Images\callout\logo.png" />
+    <Content Include="Content\Images\callout\MoodTowerIcon.png" />
+    <Content Include="Content\Images\callout\Novartis.svg" />
+    <Content Include="Content\Images\callout\Optimistic-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Optimistic-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Optimistic.svg" />
+    <Content Include="Content\Images\callout\Passionate-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Passionate-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Passionate.svg" />
+    <Content Include="Content\Images\callout\Proud-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Proud-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Proud.svg" />
+    <Content Include="Content\Images\callout\Worried-%28Left%29.png" />
+    <Content Include="Content\Images\callout\Worried-%28Right%29.png" />
+    <Content Include="Content\Images\callout\Worried.svg" />
+    <Content Include="Content\Images\deflated.png" />
+    <Content Include="Content\Images\DiscoLogo.png" />
+    <Content Include="Content\Images\disengaged.png" />
+    <Content Include="Content\Images\engaged.png" />
+    <Content Include="Content\Images\excited.png" />
+    <Content Include="Content\Images\frustrated.png" />
+    <Content Include="Content\Images\Install.png" />
+    <Content Include="Content\Images\InstallText.png" />
+    <Content Include="Content\Images\jquery-ui.discover\ui-bg_diagonals-small_40_f87777_40x40.png" />
+    <Content Include="Content\Images\jquery-ui.discover\ui-bg_diagonals-small_55_fcefa1_40x40.png" />
+    <Content Include="Content\Images\jquery-ui.discover\ui-bg_flat_0_777777_40x100.png" />
+    <Content Include="Content\Images\jquery-ui.discover\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Images\jquery-ui.discover\ui-bg_flat_65_ffffff_40x100.png" />
+    <Content Include="Content\Images\jquery-ui.discover\ui-icons_3e49cb_256x240.png" />
+    <Content Include="Content\Images\Log\CriticalError.png" />
+    <Content Include="Content\Images\Log\Information.png" />
+    <Content Include="Content\Images\Log\SeriousWarning.png" />
+    <Content Include="Content\Images\Log\Warning.png" />
+    <Content Include="Content\images\report\Bored.jpg" />
+    <Content Include="Content\images\report\Bored.png" />
+    <Content Include="Content\images\report\Deflated.jpg" />
+    <Content Include="Content\images\report\Deflated.png" />
+    <Content Include="Content\images\report\Disengaged.jpg" />
+    <Content Include="Content\images\report\Disengaged.png" />
+    <Content Include="Content\images\report\Engaged.jpg" />
+    <Content Include="Content\images\report\Engaged.png" />
+    <Content Include="Content\images\report\Excited.jpg" />
+    <Content Include="Content\images\report\Excited.png" />
+    <Content Include="Content\images\report\frustrated.jpg" />
+    <Content Include="Content\images\report\Frustrated.png" />
+    <Content Include="Content\images\report\logos.jpg" />
+    <Content Include="Content\images\report\logos.png" />
+    <Content Include="Content\images\report\myMoodLogo.png" />
+    <Content Include="Content\images\report\myMoodLogoNVS.png" />
+    <Content Include="Content\images\report\myMoodLogoNVS_872.png" />
+    <Content Include="Content\images\report\NovartisLogo.png" />
+    <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\mymoodlogo.png" />
+    <Content Include="Content\images\report\optimistic.jpg" />
+    <Content Include="Content\images\report\Optimistic.png" />
+    <Content Include="Content\images\report\Passionate.jpg" />
+    <Content Include="Content\images\report\Passionate.png" />
+    <Content Include="Content\images\report\proud.jpg" />
+    <Content Include="Content\images\report\Proud.png" />
+    <Content Include="Content\images\report\Worried.jpg" />
+    <Content Include="Content\images\report\Worried.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="evointernal.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="MyMoodWebService.asmx" />
+    <None Include="T4MVC.tt.settings.xml" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\fabric.js" />
+    <Content Include="Scripts\jquery-vsdoc.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\mood.breakdown.js" />
+    <Content Include="Scripts\mood.map.js" />
+    <Content Include="Scripts\mood.meter.js" />
+    <Content Include="Scripts\mood.tower.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Report\_ViewStart.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ModelTime.cshtml" />
+    <Content Include="Views\Event\Monitor.cshtml" />
+    <Content Include="Views\Callout\MoodBreakdown.cshtml" />
+    <Content Include="Views\EventLog\EventLogIndex.cshtml" />
+    <Content Include="Views\Shared\404.cshtml" />
+    <Content Include="Views\PushNotification\PushNotificationIndex.cshtml" />
+    <Content Include="Views\PushNotification\Edit.cshtml" />
+    <Content Include="Views\Activity\ActivityIndex.cshtml" />
+    <Content Include="Views\Event\EventChildFooter.cshtml" />
+    <Content Include="Views\Activity\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Callout\MoodTower.cshtml" />
+    <Content Include="Views\Callout\MoodThermometer.cshtml" />
+    <Content Include="Web.Test-Server.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\App\OurMoodInstall.cshtml" />
+    <Content Include="Views\App\OurMoodManifest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Mood\SetMyMood.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Discover.Lib\Discover.Common\Discover.Common.csproj">
+      <Project>{F6761043-ED1A-498B-B0D8-D8651E851EFB}</Project>
+      <Name>Discover.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Discover.Lib\Discover.Emailing.MailBee\Discover.Emailing.MailBee.csproj">
+      <Project>{8CD5E485-5515-4DCF-99B9-C744E6F99CBB}</Project>
+      <Name>Discover.Emailing.MailBee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Discover.Lib\Discover.Logging.NLog\Discover.Logging.NLog.csproj">
+      <Project>{AA52CEAE-6732-479B-8570-31F1E9AF52D3}</Project>
+      <Name>Discover.Logging.NLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyMood.Domain\MyMood.Domain.csproj">
+      <Project>{2A123F98-B930-41B2-B87A-4199BD1A8C68}</Project>
+      <Name>MyMood.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyMood.Infrastructure\MyMood.Infrastructure.csproj">
+      <Project>{C5195E10-8FAC-4A7A-9510-941C009F919A}</Project>
+      <Name>MyMood.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Android\PushSharp.Google.csproj">
+      <Project>{71E27C37-FBBF-481B-934B-1F7DBDE3C5D6}</Project>
+      <Name>PushSharp.Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Apple\PushSharp.Apple.csproj">
+      <Project>{83C67156-893D-4AFF-9169-DB34771989CB}</Project>
+      <Name>PushSharp.Apple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Blackberry\PushSharp.Blackberry.csproj">
+      <Project>{5250980B-BD11-4201-B083-AEDB8C62C471}</Project>
+      <Name>PushSharp.Blackberry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Common\PushSharp.Common.csproj">
+      <Project>{836F225F-6CD9-48DE-910C-70F8A7CF54AA}</Project>
+      <Name>PushSharp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Sample\PushSharp.Sample.csproj">
+      <Project>{1B9A3A8B-3690-4435-BF9C-B557BF2713DB}</Project>
+      <Name>PushSharp.Sample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.WindowsPhone\PushSharp.WindowsPhone.csproj">
+      <Project>{9947F510-BA9A-4045-A648-BAB687D8F513}</Project>
+      <Name>PushSharp.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp.Windows\PushSharp.Windows.csproj">
+      <Project>{0EC3A31E-B869-4465-ABDC-90C2E3CCC17D}</Project>
+      <Name>PushSharp.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PushSharp\PushSharp\PushSharp.csproj">
+      <Project>{09414728-3728-4105-A149-EC2E315355F9}</Project>
+      <Name>PushSharp %28PushSharp\PushSharp%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Mood\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MoodPrompt\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MoodPrompt\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MoodPrompt\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Callout\GetMoodSnapshotData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MoodSnapshotRequestForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Callout\MoodSnapshot.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ReportLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Callout\MoodMap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\Test.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\PersonalMoodReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\HtmlTemplates\HtmlTemplates.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\HomeIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\App\Install.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\App\Manifest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AppLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Pete.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\AddUser.cshtml" />
+    <Content Include="Views\User\ChangeMyPassword.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\User\EditUser.cshtml" />
+    <Content Include="Views\User\ForgottenPassword.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
+    <Content Include="Views\User\ManageUsers.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Local-Server.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Web-Server.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC.tt.hooks.t4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets. -->
+  <Target Name="BeforeBuild">
+    <Copy SourceFiles="web.config" DestinationFiles="obj\$(Configuration)\tempweb.config" />
+    <TransformXml Source="obj\$(Configuration)\tempweb.config" Transform="web.$(USERNAME).config" Destination="obj\$(Configuration)\tempweb2.config" />
+    <ReadLinesFromFile File="obj\$(Configuration)\tempweb2.config">
+      <Output TaskParameter="Lines" ItemName="TransformedWebConfig" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="web.config">
+      <Output TaskParameter="Lines" ItemName="UnTransformedWebConfig" />
+    </ReadLinesFromFile>
+    <Copy Condition=" @(UnTransformedWebConfig) != @(TransformedWebConfig) " SourceFiles="obj\$(Configuration)\tempweb2.config" DestinationFiles="web.config" OverwriteReadOnlyFiles="True" />
+  </Target>
+  <!--<Target Name="AfterBuild"></Target>-->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1436</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1436/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+</Project>

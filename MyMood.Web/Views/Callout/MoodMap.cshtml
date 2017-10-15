@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "MoodMap";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+    Bundles.Reference("Scripts/callouts");
+}
+@section Styles
+{
+<style type="text/css">
+    @@font-face 
+    {
+        font-family: 'Impact';
+    }
+    #mood-map
+    {
+        position:absolute;
+        left: 0px;
+        top:0px;
+        bottom:0px;
+        right:0px;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+    canvas
+    {
+        position:relative;
+        display:block;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+</style>
+}
+
+<div id="mood-map">
+</div>
+
+
+@section BodyScripts
+{
+@if (false)
+{
+    <script src="../../Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    <script src="../../Scripts/fabric.js" type="text/javascript"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#mood-map").moodmap({
+            dataUrl: '@Url.RouteUrl("Callout-MoodMap", new { EventName = ViewContext.RouteData.Values["EventName"] })',
+            updateInterval: 8000,
+            theme: {
+                logoImageUrl: '@Url.Content("~/Content/Images/Callout/Novartis.svg")',
+                noDataLogoUrl: '@Url.Content("~/Content/Images/Callout/Logo.png")'
+            },
+            mode: @(ViewContext.HttpContext.Request["mode"] ?? "1")
+        });
+    });
+</script>

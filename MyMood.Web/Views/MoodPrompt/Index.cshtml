@@ -1,0 +1,112 @@
+﻿@model IEnumerable<MyMood.Web.Models.MoodPromptModel>
+
+<div class="widgetHeader">
+    <h3>Mood Prompts</h3>
+    <a href="@Url.RouteUrl("MoodPrompt-Add", new { eventId = ViewBag.EventId })" class="addMoodPrompt">Create New</a>
+</div>
+
+<div class="widgetContent widgetTable">
+    <table cellspacing="0" class="tableStriped events">
+
+        <tr>
+            <th class="singleIcon"></th>
+            <th class="name">Name</th>
+            <th class="nText">Notification Text</th>
+            <th class="title">Title</th>
+            <th class="dateTime">TimeStamp (L)</th>
+            <th class="dateTime">Active From (L)</th>
+            <th class="dateTime">Active Til (L)</th>
+            <th class="singleIcon"></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a class="editMoodPrompt ui-icon ui-icon-disk" href="@Url.RouteUrl("MoodPrompt-Edit", new { id = item.Id })" title="Click to edit @item.Name"></a>
+                </td>
+                <td>
+                    <a class="viewMoodPrompt" href="@Url.RouteUrl("MoodPrompt", new { id = item.Id })" title="Click to view @item.Name">@item.Name</a>
+                </td>                
+                <td>@Html.DisplayFor(modelItem => item.NotificationText)</td>
+                <td>@Html.DisplayFor(modelItem => item.Activity.Title)</td>
+                <td title="@item.Activity.TimeStampUTC">@item.Activity.TimeStamp.ToWebDateTime()</td>
+                <td title="@item.ActiveFromUTC">@item.ActiveFrom.ToWebDateTime()</td>
+                <td title="@item.ActiveTillUTC">@item.ActiveTil.ToWebDateTime()</td>
+                <td>@if (item.CanDelete)
+                    {
+                        <a class="removeMoodPrompt ui-icon ui-icon-circle-close" href="@Url.RouteUrl("MoodPrompt-Delete", new { id = item.Id, eventId = ViewBag.EventId })" title="Click to remove @item.Name"></a>
+                    }
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial(MVC.Event.Views.EventChildFooter)
+
+@section BodyScripts
+{
+    @if (false)
+    {
+        <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    }
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            // enhance "add user" functionality by enabling AJAX edit via dialog
+            $("a.addMoodPrompt").click(function (event) {
+                event.preventDefault();
+                showDialogForm({
+                    contentUrl: $(this).attr("href"),
+                    title: "Add Mood Prompt",
+                    buttons: [
+                    { text: "Create", click: function () { submitDialogForm(this, { onSuccess: function (data) { $(this).dialog("close"); refreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+                });
+            });
+
+            // enhance "edit mood prompt" functionality by enabling AJAX edit via dialog
+            $("a.editMoodPrompt").live("click", function (event) {
+                event.preventDefault();
+                showDialogForm({
+                    contentUrl: $(this).attr("href"),
+                    title: "Edit Mood Prompt",
+                    buttons: [
+                        { text: "Update", click: function () { submitDialogForm(this, { onSuccess: function () { $(this).dialog("close"); refreshPage(); } }); } },
+                        { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                    ]
+                });
+            });
+
+            $("a.viewMoodPrompt").live("click", function (event) {
+                event.preventDefault();
+                showErrorMessage({ title: "Hang on there boy !", text: "This function hasn't been implemented yet." });
+            });
+
+            $("a.removeMoodPrompt").live("click", function (event) {
+                event.preventDefault();
+                var link = $(this);
+                confirmYesNo({
+                    text: "Are you sure wish to permanently delete this Mood Prompt ?",
+                    onYes: function () {
+                        $.ajax({
+                            url: link.attr("href"),
+                            success: function (data, status, xhr) {
+                                if (data.success) {
+                                    refreshPage();
+                                } else if (data.errorMessage) {
+                                    showErrorMessage({ title: "Could Not Remove User", text: data.errorMessage });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+}

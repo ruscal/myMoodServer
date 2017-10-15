@@ -1,0 +1,17 @@
+﻿
+/****** Object:  Trigger [dbo].[OnSurveyResponseUpdated_SyncStatementResponses]    Script Date: 02/07/2013 10:35:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create TRIGGER [dbo].[OnMoodResponseInserted_SyncSnapshotStats] ON [dbo].[MoodResponse] AFTER INSERT 
+AS
+BEGIN
+
+        DECLARE @responseId uniqueidentifier
+        
+        select @responseId = r.Id from inserted r
+
+        exec dbo.[UpdateGlobalMoodReportSnapshotsWithResponse] @responseId
+END

@@ -1,0 +1,209 @@
+﻿body, html, #container, #report { 
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+div.mood
+{
+    float:left;
+    overflow:hidden;
+}
+#content
+{
+    height:100%;
+}
+#configurator
+{
+    position:absolute;
+    right:0;
+    top:0;
+    font-size: 10pt;
+    padding: 10px;
+    width: 300px;
+}
+#moodMapImg
+{
+    width:100%;
+    height:100%;
+}
+#moodMap
+{
+    margin-right:320px;
+    height:95%;
+}
+
+
+/************ personal report *********************/
+
+#personalReport
+{
+    font-family: verdana;
+    font-size: 10pt;
+    font-weight:normal;
+    width: 872px;
+    margin: 0 auto;
+    padding: 20px;
+        position:relative;
+        background-color:#fff;
+}
+
+#personalReport div.header
+{
+    height: 90px;
+    font-size: 7pt;
+    background: url(../images/report/logos.png) no-repeat scroll left top #fff;
+    margin:10px 0;
+}
+
+#personalReport div.header h2
+{
+    color: #333333;
+    display: inline-block;
+    font-size: 19pt;
+    font-weight: bold;
+    margin-top: 36px;
+    width: 100%;
+}
+#personalReport div.header h2 span
+{
+    font-weight:bold;
+    display:block;
+}
+
+#personalReport div.header .logo
+{
+    background: url(../images/mymoodlogo.png) no-repeat scroll right top transparent;
+      float: right;
+    height: 50px;
+    margin-top: 26px;
+    text-indent: -9999px;
+    width: 180px;
+}
+
+#personalReport div.response
+{
+    height:90px;
+    text-align:center;
+    position:relative;
+}
+#personalReport div.response.bored
+{
+    background: url(../images/report/bored.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.deflated
+{
+    background: url(../images/report/deflated.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.disengaged
+{
+    background: url(../images/report/disengaged.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.frustrated
+{
+    background: url(../images/report/frustrated.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.worried
+{
+    background: url(../images/report/worried.jpg) no-repeat top left #fff;
+}
+
+#personalReport div.response.proud
+{
+    background: url(../images/report/proud.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.engaged
+{
+    background: url(../images/report/engaged.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.excited
+{
+    background: url(../images/report/excited.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.optimistic
+{
+    background: url(../images/report/optimistic.jpg) no-repeat top left #fff;
+}
+#personalReport div.response.passionate
+{
+    background: url(../images/report/passionate.jpg) no-repeat top left #fff;
+}
+
+#personalReport div.response span.mood
+{
+   color: #333333;
+    display: block;
+    font-family: Impact;
+    font-size: 16pt;
+    position: absolute;
+    top: 17px;
+    width: 400px;
+}
+
+#personalReport div.response span.title
+{
+     display: block;
+    font-size: 12pt;
+    position: absolute;
+
+    top: 47px;
+    width: 400px;   
+}
+
+#personalReport div.response.bored span.title,
+#personalReport div.response.deflated span.title,
+#personalReport div.response.disengaged span.title,
+#personalReport div.response.frustrated span.title,
+#personalReport div.response.worried span.title,
+#personalReport div.response.bored span.mood,
+#personalReport div.response.deflated span.mood,
+#personalReport div.response.disengaged span.mood,
+#personalReport div.response.frustrated span.mood,
+#personalReport div.response.worried span.mood
+{
+    right: 86px;
+        text-align: right;
+}
+
+#personalReport div.response.proud span.title,
+#personalReport div.response.engaged span.title,
+#personalReport div.response.excited span.title,
+#personalReport div.response.optimistic span.title,
+#personalReport div.response.passionate span.title,
+#personalReport div.response.proud span.mood,
+#personalReport div.response.engaged span.mood,
+#personalReport div.response.excited span.mood,
+#personalReport div.response.optimistic span.mood,
+#personalReport div.response.passionate span.mood
+{
+    left: 86px;
+        text-align: left;
+}
+
+
+#personalReport h3.day
+{
+    text-align:center;
+    text-transform:uppercase;
+    font-weight:normal;
+    color:#666;
+    font-family: Impact;
+}
+
+#personalReport div.response .time
+{
+    color: #333333;
+    display: block;
+    font-size: 10pt;
+    font-weight: bold;
+    position: relative;
+    top: 35px;
+}
+
+#personalReport .footer
+{
+  font-size: 8pt;
+    text-align: center;
+    margin-top:15px;
+}

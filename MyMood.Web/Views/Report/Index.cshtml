@@ -1,0 +1,40 @@
+﻿@model MyMood.Web.Models.MoodResponsesViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Responses</h2>
+
+@*<p>
+    @Html.ActionLink("New Mood", "SetMyMood")
+</p>*@
+<p>
+@Html.Partial("MoodSnapshotRequestForm", new MyMood.Web.Models.MoodSnapshotRequestModel())
+</p>
+<table>
+    <tr>
+        <th>Time Stamp</th>
+        <th>Prompt</th>
+        <th>Responder</th>
+        <th>Mood</th>
+    </tr>
+
+@foreach (var item in Model.Responses.OrderByDescending(r => r.TimeStamp)) {
+    <tr>
+        <td>
+           @item.TimeStamp
+        </td>
+        <td>
+            @item.PromptText
+        </td>
+        <td>
+            @item.ResponderId
+        </td>
+        <td>
+            @item.Mood
+        </td>
+    </tr>
+}
+
+</table>

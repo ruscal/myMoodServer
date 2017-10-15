@@ -1,0 +1,7 @@
+﻿@model Nullable<System.DateTime>      
+<div class="date-time-display multi-input-wrapper">
+    @Html.TextBox("", ViewData.Model.HasValue ? ViewData.Model.Value.ToString("dd MMM yyyy") : ViewData.ModelMetadata.NullDisplayText, new { @class = "date", @readonly = true })
+    @(ViewData["DateTimeSeparator"] != null ? ViewData["DateTimeSeparator"].ToString() : string.Empty)
+    @Html.TextBox("Hour", ViewData.Model.HasValue ? ViewData.Model.Value.Hour.ToString("00") : ViewData.ModelMetadata.NullDisplayText, new { @class = "hour", @readonly = true })
+    @Html.TextBox("Minute", ViewData.Model.HasValue ? ViewData.Model.Value.Minute.ToString("00") : ViewData.ModelMetadata.NullDisplayText, new { @class = "minute", @readonly = true })
+</div>

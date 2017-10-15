@@ -1,0 +1,99 @@
+﻿@model IEnumerable<MyMood.Web.Models.ActivityModel>
+
+<div class="widgetHeader">
+    <h3>Independent Activies</h3>
+    <a href="@Url.RouteUrl("Activity-Add", new { eventId = ViewBag.EventId })" class="addActivity">Create New</a>
+</div>
+
+<div class="widgetContent widgetTable">
+    <table cellspacing="0" class="tableStriped" id="activitiesTable">
+        <thead>
+            <tr>
+                <th class="singleIcon"></th>
+                <th>Title</th>
+                <th class="dateTime">Time Stamp (L)</th>
+                <th class="singleIcon"></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td class="singleIcon">
+                    <a class="editActivity ui-icon ui-icon-disk" href="@Url.RouteUrl("Activity-Edit", new { id = item.Id })" title="Click to edit Activity"></a>
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td title="@item.TimeStampUTC">@item.TimeStamp.ToWebDateTime()</td>
+                <td class="singleIcon">
+                    <a class="removeActivity ui-icon ui-icon-circle-close" href="@Url.RouteUrl("Activity-Delete", new { id = item.Id, eventId = ViewBag.EventId })" title="Click to remove Push Notification"></a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@Html.Partial(MVC.Event.Views.EventChildFooter)
+
+@section BodyScripts
+{
+    @if (false)
+    {
+        <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    }
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("a.addActivity").click(function (event) {
+                event.preventDefault();
+                showDialogForm({
+                    contentUrl: $(this).attr("href"),
+                    title: "Add Activity",
+                    buttons: [
+                    { text: "Create", click: function () { submitDialogForm(this, { onSuccess: function (data) { $(this).dialog("close"); refreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+                });
+            });
+
+            $("a.editActivity").live("click", function (event) {
+                event.preventDefault();
+                showDialogForm({
+                    contentUrl: $(this).attr("href"),
+                    title: "Edit Activity",
+                    buttons: [
+                        { text: "Update", click: function () { submitDialogForm(this, { onSuccess: function () { $(this).dialog("close"); refreshPage(); } }); } },
+                        { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                    ]
+                });
+            });
+
+            $("a.viewActivity").live("click", function (event) {
+                event.preventDefault();
+                showErrorMessage({ title: "Hang on there boy !", text: "This function hasn't been implemented yet." });
+            });
+
+            $("a.removeActivity").live("click", function (event) {
+                event.preventDefault();
+                var link = $(this);
+                confirmYesNo({
+                    text: "Are you sure wish to permanently delete this Activity ?",
+                    onYes: function () {
+                        $.ajax({
+                            url: link.attr("href"),
+                            success: function (data, status, xhr) {
+                                if (data.success) {
+                                    refreshPage();
+                                } else if (data.errorMessage) {
+                                    showErrorMessage({ title: "Could Not Remove Activity", text: data.errorMessage });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿USE [MyMood]
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateGlobalMoodReportSnapshotsWithResponse]    Script Date: 03/10/2013 10:01:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[UpdateGlobalMoodReportSnapshotsWithResponse]
+ @responseId uniqueidentifier
+AS
+BEGIN
+
+ BEGIN TRANSACTION UpdateResponseSnapshots
+ 
+ declare @responseTimeStamp datetime
+ declare @categoryId uniqueidentifier
+ declare @moodId uniqueidentifier
+ declare @responseStaleMins integer
+ 
+ set @responseStaleMins = 60
+
+ select @responseTimeStamp = r.TimeStampRounded, @categoryId = m.Category_Id, @moodId = m.Id from MoodResponse r
+ inner join Mood m
+ on r.Mood_Id = m.Id
+ where r.Id = @responseId
+ 
+ delete from Snapshot where TimeStamp >= @responseTimeStamp
+ and TimeStamp <= DateAdd(MINUTE, @responseStaleMins, @responseTimeStamp)
+ 
+ ;WITH cte AS
+ (
+    SELECT s.timeStamp as snapshot, r.*,
+    ROW_NUMBER() OVER (PARTITION BY s.timeStamp, responderId ORDER BY CreatedOn DESC) AS rn
+    FROM (select r.timeStamp      
+    from (
+      select r.Id as responseId, r.Responder_Id as responderId, r.Mood_Id as moodId, r.TimeStampRounded as timeStamp, r.CreationDate as createdOn 
+      from MoodResponse r
+      inner join Mood m
+      on r.Mood_Id = m.Id
+      where m.Category_Id = @categoryId) r
+    group by r.timeStamp) s
+   join (
+     select r.Id as responseId, r.Responder_Id as responderId, r.Mood_Id as moodId, r.TimeStampRounded as timeStamp, r.CreationDate as createdOn 
+     from MoodResponse r
+     inner join Mood m
+     on r.Mood_Id = m.Id
+     where m.Category_Id = @categoryId) r
+   on s.timeStamp >= r.timeStamp and DateAdd(MINUTE, -@responseStaleMins, s.timeStamp) <= r.timeStamp
+ )
+ MERGE INTO Snapshot
+ USING 
+  (SELECT snapshot, moodId, COUNT(distinct responderId) as responseCount
+   FROM cte
+   WHERE rn = 1 and snapshot >= @responseTimeStamp
+   group by snapshot, moodId) AS SRC
+  ON Snapshot.TimeStamp = SRC.snapshot and Snapshot.Mood_Id = SRC.moodId
+ WHEN MATCHED THEN
+  -- Update part of the 'UPSERT'
+  --
+  UPDATE SET
+   ResponseCount = SRC.responseCount,
+   LastEditedDate = GETUTCDATE()
+ WHEN NOT MATCHED THEN
+  -- INSERT part of the 'UPSERT'
+  --
+    insert (Id, TimeStamp, ResponseCount, CreationDate, LastEditedDate, Mood_Id, Category_Id)
+   values(NEWID(), SRC.snapshot, SRC.responseCount, GETUTCDATE(), GETUTCDATE(), SRC.moodId, @categoryId);
+ 
+
+ COMMIT TRANSACTION UpdateResponseSnapshots
+
+END

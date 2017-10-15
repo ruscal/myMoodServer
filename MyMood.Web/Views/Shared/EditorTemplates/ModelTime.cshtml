@@ -1,0 +1,22 @@
+﻿@model MyMood.Web.Models.ModelTime
+@{
+    var timeZone = ViewData["TimeZoneInfo"] as TimeZoneInfo ?? TimeZoneInfo.Utc;
+    var displayDate = (Model == null) ? DateTime.Now : ViewData.Model.FullDate;
+    var timeZoneChar = ViewData["TimeZoneVar"] ?? "L";
+
+    var hourOptions = ViewData["HourOptions"] as SelectList ?? Enumerable.Range(0, 24)
+                      .Select(h => new SelectListItem { Value = h.ToString(), Text = h.ToString("00"), Selected = h == displayDate.Hour });
+    var minuteStep = (int)(ViewData["MinuteStep"] ?? 5);
+    var minuteOptions = ViewData["MinuteOptions"] as SelectList ?? new SelectList(Enumerable.Range(0, 60).Where(m => m % minuteStep == 0).Select(m => new { Value = m, Text = m.ToString("00") }), "Value", "Text", displayDate.Minute - (displayDate.Minute % minuteStep));
+        
+    var attr = new Dictionary<string, object> { { "class", "date-picker" } , { "readonly", "readonly" } };
+    var minDate = (DateTime?)ViewData["MinDate"];
+    if (minDate != null) { attr.Add("data-minDate", minDate.Value.ToWebDate()); }
+}        
+<div class="date-time-editor multi-input-wrapper @(ViewData["class"] as string)">
+    @Html.TextBox("Date", displayDate.ToWebDate(), attr)
+    @(ViewData["DateTimeSeparator"] != null ? ViewData["DateTimeSeparator"].ToString() : string.Empty)
+    @Html.DropDownList("Hour", hourOptions, new { @class = "hours" })
+    @Html.DropDownList("Minute", minuteOptions, new { @class = "minutes" })
+    @timeZoneChar
+</div>

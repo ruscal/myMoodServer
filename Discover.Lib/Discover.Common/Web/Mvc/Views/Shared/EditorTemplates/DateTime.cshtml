@@ -1,0 +1,12 @@
+﻿@model Nullable<System.DateTime>
+@{
+    var hourOptions = ViewData["HourOptions"] as SelectList ?? new SelectList(Enumerable.Range(0, 24).Select(h => new { Value = h, Text = h.ToString("00") }), "Value", "Text", ViewData.Model.HasValue ? ViewData.Model.Value.Hour : 0);
+    var minuteStep = (int)(ViewData["MinuteStep"] ?? 1);
+    var minuteOptions = ViewData["MinuteOptions"] as SelectList ?? new SelectList(Enumerable.Range(0, 60).Where(m => m % minuteStep == 0).Select(m => new { Value = m, Text = m.ToString("00") }), "Value", "Text", ViewData.Model.HasValue ? ViewData.Model.Value.Minute - (ViewData.Model.Value.Minute % minuteStep) : 0);
+}        
+<div class="date-time-editor multi-input-wrapper @(ViewData["class"] as string)">
+    @Html.TextBox("", ViewData.Model.HasValue ? ViewData.Model.Value.ToString("dd MMM yyyy") : ViewData.ModelMetadata.NullDisplayText, new { @class = "date-picker" })
+    @(ViewData["DateTimeSeparator"] != null ? ViewData["DateTimeSeparator"].ToString() : string.Empty)
+    @Html.DropDownList("Hour", hourOptions, new { @class = "hours" })
+    @Html.DropDownList("Minute", minuteOptions, new { @class = "minutes" })
+</div>

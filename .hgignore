@@ -1,0 +1,15 @@
+glob:*.tmp
+glob:*.suo
+glob:*.vbproj.user
+glob:*.csproj.user
+glob:*/bin/*
+glob:*/obj/*
+glob:packages/*
+glob:*/packages/*
+glob:*/thumbs.db
+glob:*.orig
+glob:*.patch
+glob:*/aspnetdb.MDF
+glob:*/aspnetdb_log.LDF
+glob:*.DS_Store
+

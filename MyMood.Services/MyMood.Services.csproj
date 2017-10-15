@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7A9E443-EC04-4D25-89C7-E5C86B68B272}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyMood.Services</RootNamespace>
+    <AssemblyName>MyMood.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduledWorkService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Discover.Lib\Discover.Common\Discover.Common.csproj">
+      <Project>{F6761043-ED1A-498B-B0D8-D8651E851EFB}</Project>
+      <Name>Discover.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Discover.Lib\Discover.Data.EntityFramework4\Discover.Data.EntityFramework4.csproj">
+      <Project>{C7BEE303-AF3B-425C-8F08-4A2B1253E114}</Project>
+      <Name>Discover.Data.EntityFramework4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Discover.Lib\Discover.Emailing.MailBee\Discover.Emailing.MailBee.csproj">
+      <Project>{8CD5E485-5515-4DCF-99B9-C744E6F99CBB}</Project>
+      <Name>Discover.Emailing.MailBee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Discover.Lib\Discover.Logging.NLog\Discover.Logging.NLog.csproj">
+      <Project>{AA52CEAE-6732-479B-8570-31F1E9AF52D3}</Project>
+      <Name>Discover.Logging.NLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyMood.Domain\MyMood.Domain.csproj">
+      <Project>{2A123F98-B930-41B2-B87A-4199BD1A8C68}</Project>
+      <Name>MyMood.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

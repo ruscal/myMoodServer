@@ -1,0 +1,2 @@
+﻿@model Nullable<System.DateTime>
+@Html.TextBox("", ViewData.Model.HasValue ? ViewData.Model.Value.ToString("dd MMM yyyy") : ViewData.ModelMetadata.NullDisplayText, new { @class = "date-time", @readonly = true })

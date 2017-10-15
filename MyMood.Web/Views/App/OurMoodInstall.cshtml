@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Install";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+
+
+<div class="container">	
+
+    <h1>Our Mood</h1>
+    
+    <div class="content">
+    <h2>Welcome to the ourMood Download Page</h2>
+    
+   @* <p>This download is for testing only.  Please do not distribute.</p>*@
+
+    <p>To install the app on your iPad, open this page on your device and hit the install link below. When prompted choose OK to install the application.</p>
+    
+    <p class="created">Created by <span>Discover</span> <a href="http://www.wearediscover.com">wearediscover.com</a></p>
+    
+    <p class="install">Install the app now <a href="itms-services://?action=download-manifest&url=@Url.RouteUrl("App-Manifest-OurMood", new { }, Request.Url.Scheme)">Install</a></p>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    window.location.href= "itms-services://?action=download-manifest&url=@Url.RouteUrl("App-Manifest-OurMood", new { }, Request.Url.Scheme)";
+</script>

@@ -1,0 +1,63 @@
+﻿USE [MyMood]
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateGlobalMoodReportSnapshots]    Script Date: 02/07/2013 12:41:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[UpdateGlobalMoodReportSnapshots]
+	@categoryId uniqueidentifier
+AS
+BEGIN
+	--mood is never stale
+	--not quite working!!!
+
+	BEGIN TRANSACTION UpdateAllSnapshots
+
+	
+	;WITH cte AS
+	(
+	   SELECT s.timeStamp as snapshot, r.*,
+			 ROW_NUMBER() OVER (PARTITION BY s.timeStamp, responderId ORDER BY CreatedOn DESC) AS rn
+	   FROM (select r.timeStamp      
+				from (
+						select r.Id as responseId, r.Responder_Id as responderId, r.Mood_Id as moodId, r.TimeStampRounded as timeStamp, r.CreationDate as createdOn 
+						from MoodResponse r
+						inner join Mood m
+						on r.Mood_Id = m.Id
+						where m.Category_Id = @categoryId) r
+				group by r.timeStamp) s
+			join (
+					select r.Id as responseId, r.Responder_Id as responderId, r.Mood_Id as moodId, r.TimeStampRounded as timeStamp, r.CreationDate as createdOn 
+					from MoodResponse r
+					inner join Mood m
+					on r.Mood_Id = m.Id
+					where m.Category_Id = @categoryId) r
+			on s.timeStamp >= r.timeStamp
+	)
+	MERGE INTO Snapshot
+	USING 
+		(SELECT snapshot, moodId, COUNT(distinct responderId) as responseCount
+			FROM cte
+			WHERE rn = 1 
+			group by snapshot, moodId) AS SRC
+		ON Snapshot.TimeStamp = SRC.snapshot and Snapshot.Mood_Id = SRC.moodId
+	WHEN MATCHED THEN
+		-- Update part of the 'UPSERT'
+		--
+		UPDATE SET
+			ResponseCount = SRC.responseCount,
+			LastEditedDate = getdate()
+	WHEN NOT MATCHED THEN
+		-- INSERT part of the 'UPSERT'
+		--
+	   insert (Id, TimeStamp, ResponseCount, CreationDate, LastEditedDate, Mood_Id, Category_Id)
+			values(NEWID(), SRC.snapshot, SRC.responseCount, GETDATE(), GETDATE(), SRC.moodId, @categoryId);
+	
+
+
+	COMMIT TRANSACTION UpdateAllSnapshots
+	
+
+END

@@ -1,0 +1,24 @@
+﻿@model MyMood.Web.Models.UserLogInFormModel
+@{
+    ViewBag.Title = "Log In";
+}
+
+<div class="login">
+
+@using (Html.BeginRouteForm("LogIn", FormMethod.Post))
+{
+    @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName, new { @class = "", tabindex = "1", autofocus = "autofocus" })
+
+    @Html.LabelFor(m => m.Password)
+    @Html.PasswordFor(m => m.Password, new { @class = "", tabindex = "2" })
+
+    <div class="actionHolder">
+        <button type="submit" name="commit" class="buttonAction buttonPrimary" tabindex="3" value="submit"><span class="iconLight icon-lock"></span>Login</button>
+        <a class="forgot-password" href="@Url.RouteUrl("ForgottenPassword")" tabindex="4">I forgot my password</a>
+    </div>
+}
+
+</div>

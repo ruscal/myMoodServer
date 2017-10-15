@@ -1,0 +1,45 @@
+﻿@model MyMood.Web.Models.MoodPromptModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>MoodPromptModel</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">NotificationText</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NotificationText)
+    </div>
+
+    <div class="display-label">LabelText</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Activity.Title)
+    </div>
+
+    <div class="display-label">TimeStamp</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Activity.TimeStamp)
+    </div>
+
+    <div class="display-label">ActiveFrom</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActiveFrom)
+    </div>
+
+    <div class="display-label">ActiveTil</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActiveTil)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

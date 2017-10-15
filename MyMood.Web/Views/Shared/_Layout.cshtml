@@ -1,0 +1,45 @@
+﻿@{
+    Bundles.Reference("Styles/app", "layout");
+    Bundles.Reference("Scripts/html5", "head");
+    Bundles.Reference("Scripts/jquery", "head");
+    Bundles.Reference("Scripts/ui", "head");
+    Bundles.Reference("Scripts/common", "head");
+}   
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.SiteName | @ViewBag.Title</title>
+    @Bundles.RenderStylesheets("layout")
+    @Bundles.RenderScripts("head")
+    @RenderSection("HeadScripts", false)
+</head>
+
+<body>
+    
+    <div class="outerWrap">
+        <div class="container">
+            <header>
+                <a href="@Url.Content("~/")" class="homeLink" title="Home">Go Home</a>
+                <h1>@ViewBag.Title</h1>
+                <div class="links">
+                    <a href="@Url.Content("~/EventLog")">Event Log</a>
+                    @if (Request.IsAuthenticated)
+                    {
+                    <a href="@Url.RouteUrl("LogOut")">Log Out</a>
+                    }
+                </div>
+            </header>
+        </div>
+        <div class="body container">
+        @RenderBody()
+        </div>
+    </div>
+    @RenderSection("BodyScripts", false)
+</body>
+</html>

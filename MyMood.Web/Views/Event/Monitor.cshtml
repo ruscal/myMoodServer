@@ -1,0 +1,204 @@
+﻿@model MyMood.Web.Models.EventModel
+
+@{
+    ViewBag.Title = string.Format("Monitor event: {0}", Model.Title) ;
+}
+
+    <div class="monitorEvent">
+        @Html.HiddenFor(model => model.Id)
+
+        <span class='loading-indicator'></span>
+
+        <div class="widgetHeader">
+            <h3>Event</h3>
+            
+            <a href='#' id='refresh' title='Refresh whole page...'>Refresh</a>
+            @Html.RouteLink("MoodMap", "Callout-MoodMap", new { EventName = Model.Name, PassCode = Model.ReportPasscode})
+            @Html.RouteLink("MoodBreakdown", "Callout-MoodBreakdown", new { EventName = Model.Name, PassCode = Model.ReportPasscode })
+            @Html.RouteLink("MoodThermometer", "Callout-MoodThermometer", new { EventName = Model.Name, PassCode = Model.ReportPasscode })
+            @Html.RouteLink("MoodTower", "Callout-MoodTower", new { EventName = Model.Name, PassCode = Model.ReportPasscode })
+        </div>
+
+        <div class="widgetContent widgetTable">
+            <table cellspacing="0" class="tableStriped events">
+                <tr>
+                    <th>@Html.LabelFor(model => model.Name)</th>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(model => model.Title)</th>
+                    <td>@Html.DisplayFor(model => model.Title)</td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(model => model.StartDate)</th>
+                    <td title="@Model.StartDateUTC">@Html.DisplayFor(model => model.StartDate)</td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(model => model.EndDate)</th>
+                    <td title="@Model.EndDateUTC">@Html.DisplayFor(model => model.EndDate)</td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(model => model.TimeZone)</th>
+                    <td>@Html.DisplayFor(model => model.TimeZone)</td>
+                </tr>
+                                 <tr>
+                    <th>@Html.LabelFor(model => model.RegisteredApps)</th>
+                    <td>@Html.DisplayFor(model => model.RegisteredApps)</td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(model => model.ResponderCount)</th>
+                    <td>@Html.DisplayFor(model => model.ResponderCount)</td>
+                </tr>
+
+                <tr>
+                    <th>@Html.LabelFor(model => model.MoodSnapShot.r)</th>
+                    <td>@Html.DisplayFor(model => model.MoodSnapShot.r)</td>
+                </tr>
+            </table>  
+        </div>
+
+        <div class="widgetHeader">
+            <h3>Total Responses</h3>
+        </div>
+
+        <div class="widgetContent widgetTable">
+            <table cellspacing="0" class="tableStriped events">
+                <tr>
+                    <th></th>
+                    @foreach (var m in Model.Moods)
+                    {
+                        <th>@m.Name</th>
+                    }
+                </tr>
+                <tr>
+                        <td>Total</td>
+                        @foreach (var d in Model.MoodSnapShot.d)
+                        {
+                            <td>@d.c</td>
+                        }
+                </tr>
+            </table>
+        </div>
+
+         <div class="widgetHeader">
+            <h3>Latest Snapshot</h3>
+        </div>
+
+        <div class="widgetContent widgetTable">
+            <table cellspacing="0" class="tableStriped events">
+                <tr>
+                    <th></th>
+                    @foreach (var m in Model.Moods)
+                    {
+                        <th>@m.Name</th>
+                    }
+                </tr>
+                <tr>
+                        <td>Total</td>
+                        @foreach (var d in Model.LatestSnapShot.d)
+                        {
+                            <td>@d.c</td>
+                        }
+                </tr>
+            </table>
+        </div>
+
+        <div class="widgetHeader">
+            <h3>Responses by Prompt</h3>
+        </div>
+
+        <div class="widgetContent widgetTable">
+            <table cellspacing="0" class="tableStriped events">
+                <tr>
+                    <th></th>
+                    @foreach (var m in Model.Moods)
+                    {
+                        <th>@m.Name</th>
+                    }
+                </tr>
+            @foreach (var r in Model.TotalReportLines)
+            {
+                <tr>
+                    <th>@r.Name</th>
+                    @foreach (var rc in r.Cells)
+                    {
+                        <td title='@rc.ColName'>@(rc.Value == 0 ? "-" : rc.Value.ToString())</td>
+                    }
+                </tr>
+            }
+            </table>
+        </div>
+
+
+    <div class='widgetFooter'>
+
+        <label for='autoRefresh'>Auto Refresh</label>
+        <select id='autoRefresh' name='autoRefresh'>
+            <option value='0'>none</option>
+            <option value='1'>1 min</option>
+            <option value='5'>5 min</option>
+            <option value='10'>10 Min</option>
+        </select>
+        @Html.RouteLink(string.Format("IAs ({0})", Model.IndependentActivityCount), "Event-Activities", new { EventName = Model.Name }, new { Title = "Independent Activities" })
+        @Html.RouteLink(string.Format("Push Notifications ({0})", Model.PushNotificationCount), "Event-PushNotifications", new { EventName = Model.Name }, new { Title = "Push Notifications" })
+        @Html.RouteLink(string.Format("Mood Prompts ({0})", Model.MoodPromptCount), "Event-Prompts", new { EventName = Model.Name }, new { Title = "Mood Prompts" })
+        @Html.ActionLink("Event List", MVC.Home.ActionNames.Index, MVC.Home.Name, new { Title = "Event List" })
+    </div>
+
+</div>
+
+@if (false)
+{
+    <script src="~/Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+}
+
+<script type="text/javascript">
+    var cookieName = "autoRefreshCookie";
+    var $autoRefreshSelect = $('#autoRefresh');
+    var int;
+
+    $(document).ready(function () {
+
+        $('a#refresh').live("click", function (event) {
+            event.preventDefault();
+            $(this).hide();
+            refresh();
+        });
+
+        $autoRefreshSelect.change(function () {
+            $.cookie(cookieName, $autoRefreshSelect.val(), { expires: 28, path: "/" });
+            SetInterval($autoRefreshSelect.val());
+        });
+
+        refreshDelay = $.cookie(cookieName);
+        $autoRefreshSelect.val( (refreshDelay == null) ? 0 : refreshDelay);
+
+        setInterval($autoRefreshSelect.val());
+
+    });
+
+    function SetInterval(interval) {
+        if (interval == 0) {
+            clearInterval(int);
+        }
+        else {
+            int = setInterval(refresh, interval * 60 * 1000);
+        }
+    }
+
+    function refresh() {
+        $(".loading-indicator").show();
+        $.ajax({
+            url: '@Url.RouteUrl("Event-Monitor", new { EventName = Model.Name })',
+            type: "GET",
+            dataType: "html",
+            success: function (data, status, xhr) {
+                $("div.body.container").html(data);
+            }
+        });
+    }
+
+</script>
+
+
+

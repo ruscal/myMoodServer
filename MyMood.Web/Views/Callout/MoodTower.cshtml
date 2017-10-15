@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "MoodTower";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+
+    Bundles.Reference("Scripts/callouts");
+}
+@section Styles
+{
+<style type="text/css">
+    @@@@font-face 
+    {
+        font-family: 'Impact';
+    }
+    #mood-tower
+    {
+        position:absolute;
+        height:1920px;
+        width:360px;
+        
+        background-color:#727880;
+        border: none; /*1px solid red;*/
+        padding:0px;
+        margin:0px;
+        
+        
+        transform: rotate(90deg) translate(-960px,-960px);
+        transform-origin:0% 50%;
+        -webkit-transform: rotate(90deg) translate(-960px,-960px);
+        -webkit-transform-origin:0% 50%;
+        -moz-transform: rotate(90deg) translate(-960px,-960px);
+        -moz-transform-origin:0% 50%;
+        -o-transform: rotate(90deg) translate(-960px,-960px);
+        -o-transform-origin:0% 50%;
+        -ms-transform: rotate(90deg) translate(-960px,-960px);
+        -ms-transform-origin:0% 50%;
+        
+    }
+    canvas
+    {
+        position:relative;
+        display:block;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+</style>
+}
+
+<div id="mood-tower">
+</div>
+
+@section BodyScripts
+{
+@if (false)
+{
+    <script src="../../Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    <script src="../../Scripts/fabric.js" type="text/javascript"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#mood-tower").moodtower({
+            dataUrl: '@Url.RouteUrl("Callout-MoodTower", new { EventName = ViewContext.RouteData.Values["EventName"] })',
+            updateInterval: 10000,
+            theme: {
+                moodFontSizeMin: $("#mood-tower").height() * 0.01,
+                moodFontSizeMax: $("#mood-tower").height() * 0.02,
+                logoImageUrl: '@Url.Content("~/Content/Images/Callout/MoodTowerIcon.png")',
+                moodImageRootUrl: '@Url.Content("~/Content/Images/Callout")'
+            }
+        });
+    });
+</script>

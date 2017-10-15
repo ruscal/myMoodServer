@@ -1,0 +1,17 @@
+﻿@model MyMood.Web.Models.MoodSnapshotRequestModel
+
+
+
+@using (Html.BeginForm())
+{
+    <p>
+    @Html.LabelFor(m => m.CategoryName)
+    @Html.TextBoxFor(m => m.CategoryName)
+    </p>
+    <p>
+    @Html.LabelFor(m => m.TimeOfSnapshot)
+    @Html.TextBoxFor(m => Model.TimeOfSnapshot)
+    </p>
+
+    <input type="submit" value="Get Snapshot" />
+}

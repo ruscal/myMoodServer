@@ -1,0 +1,97 @@
+﻿body { background: #4f5761; color: #fff; font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 62.5%; }
+a { color: #0088CC; text-decoration: none; }
+a:hover { color: #9cf;  text-decoration: underline; }
+p { font-size: 1.6em; }
+.container { display: block; width: 1000px; margin: 0px auto; position: relative; }
+.content { margin-left: 200px; padding-top: 100px; width: 600px; position: relative; padding-bottom: 50px;  }
+
+header { position: relative; margin: 1em 0 0 0; }
+header a.homeLink { display: block; float: left; width: 120px; height: 136px; background: url(../Images/Logo.png) no-repeat 0 0; text-indent: -9999px; }
+header .links { position: absolute; right: 1em; top: 1em; text-align: right; }
+header .links a {display: block; font-size: 1.5em; margin-bottom: 0.5em;}
+h1 { display: block; font-size: 3em; padding: 2em 5em;}
+
+p { font-size: 1.4em; margin-bottom: 1em;  }
+
+p.created span { display: block;  background: url(../Images/DiscoLogo.png) no-repeat left top;width: 130px; height: 17px; text-indent: -9999px; }
+p.install { background: url(../Images/InstallText.png) no-repeat center top; padding-left: 124px; display: block;  width: 300px; overflow: hidden; text-indent: -9999px; position: absolute; right: 0px; bottom: 0px; height: 150px;  margin: 0px;  }
+p.install a { background: url(../Images/Install.png) no-repeat left top; display: block; width: 150px; height: 150px; float: right;   }
+
+table { border-collapse: collapse; border-spacing: 0; font-size: 0.9em; margin-bottom: 18px; table-layout: fixed; width: 100%;}
+table th { font-weight: bold; }
+table th, table td {border: 1px solid #DDDDDD; padding: 0.3em;}
+
+.widget { position: relative; clear: both; width: auto; margin-bottom: 1em; overflow: hidden;}
+.widgetHeader, .widgetFooter
+{
+    position: relative; height: 40px; line-height: 4em; background: #E9E9E9; border: 1px solid #D5D5D5;
+    background: -moz-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA), color-stop(100%, #E9E9E9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* IE10+ */
+    background: linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-background-clip: padding-box;
+     /*behavior: url('/Content/Css/PIE.htc');*/
+}
+.widgetHeader h3 { position: relative; top: 2px; left: 10px; display: inline-block; margin-right: 3em; font-size: 1.2em; font-weight: 800;
+    color: #555; line-height: 18px; text-shadow: 1px 1px 2px rgba(255, 255, 255, .5); }
+.widgetHeader a, .widgetFooter a { float:right; margin-right:1em;  font-size: 1.5em; }
+.widgetHeader[class^="icon-"], .widgetHeader[class*=" icon-"]
+{ display: inline-block; margin-left: 13px; margin-right: -2px; font-size: 16px; color: #555; vertical-align: middle; }
+.widgetContent { padding: 20px 15px 15px; background: #FFF; border: 1px solid #D5D5D5; border-radius: 5px; }
+.widgetTable { padding: 0; margin: 0; font-size: 0.9em; border-radius: 0 0 5px 5px; }
+.widgetHeader + .widgetContent { border-top: none; border-top-left-radius: 0; border-top-right-radius: 0;}
+
+.widgetTable td, .widgetTable th {font-size: 1.5em; color: #555555; }
+.widgetPanel label {font-size: 1.5em; color: #555555; }
+
+table th.singleIcon, table td.singleIcon { width: 1em; text-align: center; font-size: 1.6em; }
+table th.name, table td.name { width: 10em; }
+table th.title, table td.title { width: 10em; }
+table th.nText, table td.nText { width: 20em; }
+table th.dateTime, table td.dateTime { width: 9em; }
+
+.login { margin: 0; }
+.login form { width: 400px; margin-top: 5em; background: #eee; border-radius: 5px; padding: 2em; }
+.login form label { display: block; font-size: 1.6em; color:  #555555; }
+.login form input { padding: 0.4em; margin-bottom: 1em; width: 160px; }
+.login form img { float: right; margin-right: 1em; }
+.login form h1 { line-height: 78px; margin-bottom: 0; }
+.login form p { padding-bottom: 2em; }
+
+.ui-tooltip-discover { font-size: 1.6em; }
+
+/* List Events */
+#eventsTable th.childCounts {width : 2em;}
+#eventsTable th.timeZone { width: 18em; }
+
+/* Optional Dates in Editors */
+div.hidden { visibility: hidden; }
+
+/* Edit PushNotification */
+#pushNotificationsTable th.status { width: 5em; }
+#Message.editPushNotificationText { height: 8em; width: 98%; font-size: 1.4em; }
+
+/* Monitor Event */
+.monitorEvent {position: relative; background-color: white; color: Black; }
+.monitorEvent .loading-indicator {display: none; position:absolute; top: 0.5em; right: 1em; z-index: 1; }
+
+/* Log View */
+#logSearchCriteria {margin: 1em;}
+#logSearchCriteria td, #logSearchCriteria th {border: none; }
+#logSearchCriteria th.dateTimeEditor { width: 18em;}
+#logSearchCriteria th.errorLevel { width: 7em;}
+#logSearchCriteria th.submit { width: 7em;}
+#logSearchCriteria td.errorText input {width: 90%;}
+
+#logTable th.id, #logTable td.id { width: 2em; white-space: nowrap; padding-right: 1em; }
+#logTable span.level {display: inline-block; text-indent: -9999px; width: 16px; height: 16px;}
+#logTable span.level.info {background: url(../Images/Log/Information.png) no-repeat -67px -26px;}
+#logTable span.level.error {background: url(../Images/Log/CriticalError.png) no-repeat  -99px -37px;}
+
+

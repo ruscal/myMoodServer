@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Mood Breakdown";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+
+    Bundles.Reference("Scripts/callouts");
+}
+@section Styles
+{
+<style type="text/css">
+    @@font-face 
+    {
+        font-family: 'Impact';
+    }
+    #mood-breakdown
+    {
+        position:absolute;
+        left: 0px;
+        top:0px;
+        bottom:0px;
+        right:0px;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+    canvas
+    {
+        position:relative;
+        display:block;
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+</style>
+}
+
+<div id="mood-breakdown">
+</div>
+
+@section BodyScripts
+{
+@if (false)
+{
+    <script src="../../Scripts/jquery-vsdoc.js" type="text/javascript"></script>
+    <script src="../../Scripts/fabric.js" type="text/javascript"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#mood-breakdown").moodbreakdown({
+            dataUrl: '@Url.RouteUrl("Callout-MoodBreakdown", new { EventName = ViewContext.RouteData.Values["EventName"] })',
+            updateInterval: 5000,
+            theme: {
+                moodImageRootUrl: '@Url.Content("~/Content/Images/Callout")',
+                noDataLogoUrl: '@Url.Content("~/Content/Images/Callout/Logo.png")'
+            }
+        });
+    });
+</script>

@@ -1,0 +1,47 @@
+﻿@model MyMood.Web.Models.EditMoodPromptModel
+
+@using (Html.BeginForm(MVC.MoodPrompt.ActionNames.Save, MVC.MoodPrompt.Name)) {
+
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.EventId)
+
+    <div>
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.NotificationText)
+        @Html.EditorFor(model => model.NotificationText)
+        @Html.ValidationMessageFor(model => model.NotificationText)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Activity.Title)
+        @Html.EditorFor(model => model.Activity.Title)
+        @Html.ValidationMessageFor(model => model.Activity.Title)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Activity.TimeStamp)
+        @Html.EditorFor(model => model.Activity.TimeStamp)
+        @Html.ValidationMessageFor(model => model.Activity.TimeStamp)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.ActiveFrom)
+        @Html.EditorFor(model => model.ActiveFrom)
+        @Html.ValidationMessageFor(model => model.ActiveFrom)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.ActiveTil)
+        @Html.EditorFor(model => model.ActiveTil)
+        @Html.ValidationMessageFor(model => model.ActiveTil)
+    </div>
+
+}
+

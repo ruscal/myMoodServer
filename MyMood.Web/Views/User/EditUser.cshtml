@@ -1,0 +1,35 @@
+﻿@model MyMood.Web.Models.EditUserFormModel
+
+@using (Html.BeginRouteForm("EditUser", new { userId = Model.UserId }, FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    
+    @Html.HiddenFor(m => m.UserId)
+
+    <div>
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName)
+        @Html.ValidationMessageFor(m => m.UserName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DisplayName)
+        @Html.TextBoxFor(m => m.DisplayName)
+        @Html.ValidationMessageFor(m => m.DisplayName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.EmailAddress)
+        @Html.TextBoxFor(m => m.EmailAddress)
+        @Html.ValidationMessageFor(m => m.EmailAddress)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.AssignedRoles)
+        @Html.ListBoxFor(m => m.AssignedRoles, Model.AvailableRoles)
+        @Html.ValidationMessageFor(m => m.AssignedRoles)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Enabled)
+        @Html.CheckBoxFor(m => m.Enabled)
+        @Html.ValidationMessageFor(m => m.Enabled)
+    </div>
+
+}

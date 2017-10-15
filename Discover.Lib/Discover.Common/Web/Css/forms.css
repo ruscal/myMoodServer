@@ -1,0 +1,177 @@
+﻿/*
+@reference "reset.css";
+*/
+
+/**** Dialog Forms ****/
+
+.ui-widget
+{
+    font-size:1em !important;
+}
+
+.ui-dialog .loading-message
+{
+    display:block;
+    width:100%;
+    min-height:2em;
+    text-align:center;
+    vertical-align:middle;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+    font-style:italic;
+    color:#414141;
+}
+.ui-dialog .loading-message .loading-indicator
+{
+    padding-bottom:0;
+    margin-bottom:-0.5em;
+}
+
+.ui-dialog-content form > div
+{
+    margin:10px 5px 10px 5px;
+    position:relative;
+}
+
+.ui-dialog-content form > div.note
+{
+    font-style:italic;
+    font-size:0.8em;
+    color:#999999;
+}
+
+.ui-dialog-content form > div.divider
+{
+    margin-top:1.5em;
+    font-style:italic;
+    font-size:0.8em;
+    color:#999999;
+}
+
+.ui-dialog-content form > div.validation-summary-errors
+{
+}
+.ui-dialog-content form > div.validation-summary-errors ul
+{
+    list-style-type:none;
+}
+.ui-dialog-content form > div.validation-summary-errors li
+{
+    padding:6px;
+    border: 1px solid #D95252;
+    background: #F78B83;
+    color: #912323;
+}
+
+.ui-dialog-content form > div > label
+{
+    display:inline-block;
+    vertical-align:middle;
+    padding:4px;
+    margin-top:0.5em;
+}
+.ui-dialog-content form > div > input,
+.ui-dialog-content form > div > select,
+.ui-dialog-content form > div > textarea,
+.ui-dialog-content form > div > span.ui-dropdownchecklist,
+.ui-dialog-content form > div > div.multi-input-wrapper
+{
+    display:inline-block;
+    vertical-align:middle;
+    position:absolute;
+    right:0px;
+    padding:4px;
+    width:240px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.ui-dialog-content form > div > span.ui-dropdownchecklist,
+.ui-dialog-content form > div > div.multi-input-wrapper
+{
+    padding:0px !important;
+}
+.ui-dialog-content form > div > input[type=checkbox]
+{
+    width:auto;
+    position:absolute;
+    right:220px;
+    top:10px;
+}
+.ui-dialog-content form > div.checkbox-list-container > div.multi-input-wrapper
+{
+    display:inline-block;
+    position:relative;
+    /*overflow-x:visible;*/
+    float:none;
+    clear:both;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+.ui-dialog-content form > div > span.readonly-indicator
+{
+    display:inline-block;
+    position:absolute;
+    right:240px;
+    top:10px;
+}
+
+.ui-dialog-content form > div.checkbox-list-container li
+{
+    margin:6px 0 6px 0;
+}
+
+.ui-dialog-content form > div:after 
+{
+    content:"";
+    display:table;
+    clear:both;
+}
+
+.ui-dialog .ui-dialog-buttonpane button
+{
+    min-width: 120px;
+    margin-left:20px !important;
+    margin-right:0px !important;
+}
+
+.ui-dropdownchecklist
+{
+    background:#fff !important;
+}
+.ui-dropdownchecklist-text
+{
+    line-height:1.5em;
+}
+
+div.date-time-editor input.date-picker,
+div.date-time-display input.date
+{
+    padding:4px 2px 4px 2px;
+    text-align: center;
+    margin-right:0px;
+    width:100px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+div.date-time-editor select
+{
+    padding:4px 2px 4px 2px;
+    width:50px;
+    margin-left:1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+div.date-time-display input.hour,
+div.date-time-display input.minute
+{
+    padding:4px 2px 4px 2px;
+    width:45px;
+    margin-left:1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}

@@ -1,0 +1,108 @@
+﻿@model MyMood.Web.Models.EventsViewModel
+@{
+    ViewBag.Title = "Events";
+}
+
+<div class="widget">
+    <div class="widgetHeader">
+        <h3>Upcoming Events</h3>
+        <a href="@Url.RouteUrl("Events", new { action = "Add" })" class="addEvent">Create New</a>
+    </div>
+    <div class="widgetContent widgetTable">
+        <table cellspacing="0" class="tableStriped" id="eventsTable">
+            <thead>
+                <tr>
+                    <th class="singleIcon">&nbsp;</th>
+                    <th class="name">Event Name</th>
+                    <th class="displayname">Title</th>
+                    <th class="dateTime">Starts (L)</th>
+                    <th class="dateTime">Ends (L)</th>
+                    <th class="dateTime">Go Live (L)</th>
+                    <th class="childCounts" title="Mood Prompts">MPs</th>
+                    <th class="childCounts" title="Push Notifications">PNs</th>
+                    <th class="childCounts" title="Independent Activities">IAs</th>
+                    <th class="timeZone">TimeZone</th>
+                    <th class="singleIcon">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in Model.Events)
+                {
+                <tr>
+                    <td class="singleIcon">
+                        <a class="editEvent ui-icon ui-icon-disk" href="@Url.Action(MVC.Event.ActionNames.Edit, MVC.Event.Name, new { id = e.Id })" title="Click to edit @e.Name"></a>
+                    </td>
+                    <td><a class="viewEvent" href="@Url.RouteUrl("Event-Monitor", new {EventName = e.Name })" title="Click to view @e.Name">@e.Name</a></td>
+                    <td>@e.Title</td>
+                    <td title="@e.StartDateUTC">@e.StartDate</td>
+                    <td title="@e.EndDateUTC">@e.EndDate</td>
+                    <td title="@e.GoLiveDateUTC">@e.GoLiveDate</td>
+                    <td>@Html.RouteLink(e.MoodPromptCount.ToString(), "Event-Prompts", new { EventName = e.Name }, new { Title = "Mood Prompts" })</td>
+                    <td>@Html.RouteLink(e.PushNotificationCount.ToString(), "Event-PushNotifications", new { EventName = e.Name }, new { Title = "Push Notifications" })</td>
+                    <td>@Html.RouteLink(e.IndependentActivityCount.ToString(), "Event-Activities", new { EventName = e.Name }, new { Title = "Independent Activities" })</td>
+                    <td>@e.TimeZone</td>
+                    <td class="singleIcon">
+                        <a class="removeEvent ui-icon ui-icon-circle-close" href="@Url.Action(MVC.Event.ActionNames.Remove, MVC.Event.Name, new { id = e.Id })" title="Click to remove @e.Name"></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("a.editEvent").live("click", function (event) {
+            event.preventDefault();
+            showDialogForm({
+                contentUrl: $(this).attr("href"),
+                title: "Edit event",
+                buttons: [
+                    { text: "Update", click: function () { submitDialogForm(this, { onSuccess: function () { $(this).dialog("close"); RefreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+            });
+        });
+
+        $("a.addEvent").live("click", function (event) {
+            event.preventDefault();
+            showDialogForm({
+                contentUrl: $(this).attr("href"),
+                title: "Add event",
+                buttons: [
+                    { text: "Create", click: function () { submitDialogForm(this, { onSuccess: function () { $(this).dialog("close"); RefreshPage(); } }); } },
+                    { text: "Cancel", click: function () { $(this).dialog("close"); } }
+                ]
+            });
+        });
+
+        $("a.removeEvent").live("click", function (event) {
+            event.preventDefault();
+            var $link = $(this);
+            var name = $link.parents("tr").find("a.viewEvent").text();
+            confirmYesNo({
+                text: "Are you sure wish to permanently delete this event:" + name,
+                onYes: function () {
+                    $.ajax({
+                        url: $link.attr("href"),
+                        success: function (data, status, xhr) {
+                            if (data.success) {
+                                RefreshPage();
+                            } else if (data.errorMessage) {
+                                showErrorMessage({ title: "Could Not Remove Event", text: data.errorMessage });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    function RefreshPage() {
+        window.location.reload();
+    }
+
+</script>
+

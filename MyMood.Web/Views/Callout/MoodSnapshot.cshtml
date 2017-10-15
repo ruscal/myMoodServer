@@ -1,0 +1,60 @@
+﻿@model MyMood.Web.Models.MoodSnapshotModel
+@{
+    ViewBag.Title = "MoodSnapshot";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+
+<div id="container">
+<div id="report"  class="@Model.Orientation">
+@foreach (var m in Model.Data.Moods.OrderBy(m => m.DisplayIndex))
+{
+    <div class="mood @m.Mood" data-count="@m.ResponseCount" data-percentage="@m.ResponsePercentage" style="@("background-color:" + m.DisplayColor + ";")"><label>@m.Mood</label></div>
+}
+</div>
+</div>
+@Html.Hidden("AppId", Model.PassCode)
+@Html.Hidden("MoodIsStaleMins", Model.MoodIsStaleMins)
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var orientation = "@Model.Orientation.ToLower()";
+
+        refreshView();
+        getData();
+
+        setInterval(function () {
+            getData();
+        }, 15000);
+
+
+        function refreshView() {
+            $(".mood").each(function () {
+                if (orientation == "horizontal") {
+                    $(this).css({ width: $(this).attr("data-percentage") + "%", height: "100%" });
+                } else {
+                    $(this).css({ width: "100%", height: $(this).attr("data-percentage") + "%" });
+                }
+            });
+
+        }
+
+        function getData() {
+            var appId = $("#AppId").val();
+            var url = window.location.siteRoot + "/Report/GetMoodSnapshotData/" + appId + "/?MoodIsStaleMins=" + $("MoodIsStaleMins").val();
+            console.log("url: ", url);
+            $.getJSON(url, function (data) {
+                console.log("data:", data);
+                for (var i in data.Moods) {
+                    var m = data.Moods[i];
+                    $(".mood." + m.Mood).each(function () {
+                        $(this).attr("data-count", m.ResponseCount);
+                        $(this).attr("data-percentage", m.ResponsePercentage);
+                    });
+                }
+                refreshView();
+            });
+        }
+
+    });
+</script>

@@ -1,0 +1,32 @@
+﻿@{
+    Bundles.Reference("Styles/install");
+         
+    Bundles.Reference("Scripts/jquery", "head");
+    Bundles.Reference("Scripts/ui", "head");
+}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Bundles.RenderStylesheets()
+
+    @RenderSection("Styles", false)
+    <script type="text/javascript">
+        window.location.siteRoot = "@(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath.TrimEnd('/')))";
+    </script>
+    @Bundles.RenderScripts("head")
+    @RenderSection("HeadScripts", false)
+</head>
+<body>
+
+    @RenderBody()
+
+    @Bundles.RenderScripts()
+    @RenderSection("BodyScripts", false)
+</body>
+</html>
